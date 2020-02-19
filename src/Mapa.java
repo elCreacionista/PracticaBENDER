@@ -11,32 +11,35 @@ public class Mapa {
 
     public char[][] createMap(String mapa) {
 
-        char[] MAP = mapa.toCharArray();
-        int  height = 0;
+        char[]      MAP = mapa.toCharArray();
+        int         height = 0;
         for (int i = 0; i < MAP.length; i++) {
             if (MAP[i] == '\n'){
                 height++;
             }
         }
         height++;
-        int lugarenmap = 0;
-        char[][] map = new char[height][];
+        int         lugarenmap = 0;
+        char[][]    map = new char[height][];
+        int         cont = 0;
+
         for (int i = 0; i < height; i++) {
-            int cont = 0;
-            int sizefila = 0;
-            while (MAP[cont++] != '\n'){
+
+            int         sizefila = 0;
+
+            while (MAP[cont] != '\n' && cont < MAP.length - 1){
+                cont++;
                 sizefila++;
             }
-
-            char[] m = new char[sizefila];
-            for (int j = 0; j < m.length ; j++) {
-                m[j] = MAP[lugarenmap++];
+            cont++;
+            char[]      m = new char[sizefila];
+            for (int j = 0; j < m.length ; j++,lugarenmap++) {
+                m[j] = MAP[lugarenmap];
             }
             map[i] = m;
+            if (MAP[lugarenmap] == '\n')
             lugarenmap++;
         }
-
-
 
         return map;
     }
