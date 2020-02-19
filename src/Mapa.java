@@ -25,7 +25,7 @@ public class Mapa {
             int cont = 0;
             int sizefila = 0;
             while (MAP[cont++] != '\n'){
-                sizefila++;8
+                sizefila++;
             }
 
             char[] m = new char[sizefila];
