@@ -19,8 +19,8 @@ public class main {
 
         Mapa xd = new Mapa(mapa);
         for (int i = 0; i <xd.map.length ; i++) {
-            for (int j = 0; j <xd.map[0].length ; j++) {
-                System.out.print(xd.map[i][j] );
+            for (int j = 0; j <xd.map[i].length ; j++) {
+                System.out.print(xd.map[i][j]);
             }
             System.out.println("");
         }

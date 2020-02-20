@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Mapa {
     Casella[][] map;
@@ -11,34 +13,33 @@ public class Mapa {
 
     public char[][] createMap(String mapa) {
 
-        char[]      MAP = mapa.toCharArray();
-        int         height = 0;
-        for (int i = 0; i < MAP.length; i++) {
-            if (MAP[i] == '\n'){
-                height++;
+        char[][] map;
+        List<List<Character>> listas = new ArrayList<>();
+        List<Character> linea = new ArrayList<>();
+
+        for (int i = 0; i < mapa.length() ; i++) {
+
+
+            if (mapa.charAt(i) != '\n') {
+                linea.add(mapa.charAt(i));
+            }
+            else {
+                listas.add(linea);
+                linea = new ArrayList<>();
+            }
+            if (i == mapa.length() - 1){
+                listas.add(linea);
             }
         }
-        height++;
-        int         lugarenmap = 0;
-        char[][]    map = new char[height][];
-        int         cont = 0;
 
-        for (int i = 0; i < height; i++) {
 
-            int         sizefila = 0;
+        map = new char[listas.size()][];
 
-            while (MAP[cont] != '\n' && cont < MAP.length - 1){
-                cont++;
-                sizefila++;
+        for (int i = 0; i < map.length ; i++) {
+            map[i] = new char[listas.get(i).size()];
+            for (int j = 0; j < map[i].length ; j++) {
+                map[i][j] = listas.get(i).get(j);
             }
-            cont++;
-            char[]      m = new char[sizefila];
-            for (int j = 0; j < m.length ; j++,lugarenmap++) {
-                m[j] = MAP[lugarenmap];
-            }
-            map[i] = m;
-            if (MAP[lugarenmap] == '\n')
-            lugarenmap++;
         }
 
         return map;
@@ -48,9 +49,9 @@ public class Mapa {
     public void constructMap(char[][] mapa){
 
         map = new Casella[mapa.length][];
-        for (int i = 0; i < mapa.length; i++) {
+        for (int i = 0; i < map.length; i++) {
             map[i] = new Casella[mapa[i].length];
-            for (int j = 0; j < mapa[i].length ; j++) {
+            for (int j = 0; j < map[i].length ; j++) {
 
                 switch (mapa[i][j]){
                     case '#': this.map[i][j] = new Pared(); break;
@@ -67,27 +68,6 @@ public class Mapa {
 
         }
 
-    }
-
-    private Point SearchSize(String mapa){
-        Point size = new Point(0,0);
-        int contador = 0;
-        while (mapa.charAt(contador) != '\n'){
-            contador++;
-        }
-        size.y = contador + 1;
-        contador = 0;
-
-
-        for (int i = 0; i < mapa.length() ; i++) {
-            if (mapa.charAt(i) == '\n'){
-                contador++;
-            }
-        }
-        size.x = contador + 1;
-
-
-        return size;
     }
 
 }
