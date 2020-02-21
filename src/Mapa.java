@@ -4,10 +4,13 @@ import java.util.List;
 
 public class Mapa {
     Casella[][] map;
+    Teleportador[] teletransportadores;
+    Invers[] inversores;
 
-    
     Mapa(String mapa){
         constructMap(createMap(mapa));
+        teletransportadores = getTeleporters();
+        inversores = getInversors();
     }
 
 
@@ -67,7 +70,60 @@ public class Mapa {
             }
 
         }
+    }
 
+    public Invers[] getInversors(){
+        List<Point> lista = new ArrayList<>();
+        for (int i = 0; i < this.map.length ; i++) {
+            for (int j = 0; j < this.map[i].length ; j++) {
+                if (map[i][j] instanceof Invers)
+                    lista.add(new Point(i,j));
+            }
+        }
+        Invers[] t = new Invers[lista.size()];
+        for (int i = 0; i < t.length ; i++) {
+            t[i] = new Invers(lista.get(i));
+        }
+
+        return t;
+    }
+    public Teleportador[] getTeleporters(){
+        List<Point> lista = new ArrayList<>();
+        for (int i = 0; i < this.map.length ; i++) {
+            for (int j = 0; j < this.map[i].length ; j++) {
+                if (map[i][j] instanceof Teleportador) {
+                    lista.add(new Point(i, j));
+                    map[i][j] = new Buid();
+                }
+            }
+        }
+        Teleportador[] t = new Teleportador[lista.size()];
+        for (int i = 0; i < t.length ; i++) {
+            t[i] = new Teleportador(lista.get(i));
+        }
+
+        return t;
+    }
+
+    public Point getBot(){
+        for (int i = 0; i < this.map.length ; i++) {
+            for (int j = 0; j < this.map[i].length ; j++) {
+                if (this.map[i][j] instanceof Bot) {
+                    this.map[i][j] = new Buid();
+                    return new Point(i, j);
+                }
+            }
+        }
+        return null;
+    }
+    public Point getEnd(){
+        for (int i = 0; i < this.map.length ; i++) {
+            for (int j = 0; j < this.map[i].length ; j++) {
+                if (map[i][j] instanceof Fi)
+                    return new Point(i,j);
+            }
+        }
+        return null;
     }
 
 }
@@ -91,6 +147,11 @@ class Buid extends  Casella{
     }
 }
 class Invers extends Casella{
+    Invers(){}
+    Invers(Point t){
+        this.point = t;
+    }
+
     @Override
     public String toString(){
         return "1";
@@ -98,15 +159,10 @@ class Invers extends Casella{
 }
 class Teleportador extends Casella{
     Teleportador(){}
-    Teleportador(Teleportador t){
-        this.relacionat = t;
+    Teleportador(Point t){
+        this.point = t;
     }
 
-    public void setTeleportador(Teleportador t){
-        this.relacionat = t;
-    }
-
-    Teleportador relacionat;
     @Override
     public String toString(){
         return "T";

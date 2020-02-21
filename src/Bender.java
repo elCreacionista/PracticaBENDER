@@ -18,16 +18,31 @@ el robot troba un inversor, canvia la prioritat de les seves direccions: N (Nort
 
 public class Bender {
 
-    String mapa;
 
+    Mapa map;
+    Robot bot;
 
     Bender(String mapa){
-        this.mapa = mapa;
+        this.map = new Mapa(mapa);
+        this.bot = new Robot(this.map, this.map.getBot());
     }
 
 
     public String run(){
-        return "d";
+        String movimiento = "";
+        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi)){
+            System.out.println(bot.direccion.getDireccion(bot.movimiento));
+            if (bot.moverse(this.map))
+                System.out.println("paso");
+                else bot.cambiarDireccion(this.map);
+
+                if (bot.pisarTeleport(this.map))
+                    System.out.println("pisado teleport");
+                if (bot.pisarInvertido(this.map))
+                    System.out.println("pisado invertido");
+
+        }
+        return bot.path;
     }
 
 
