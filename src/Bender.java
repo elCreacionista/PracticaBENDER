@@ -16,6 +16,8 @@ el robot troba un inversor, canvia la prioritat de les seves direccions: N (Nort
 «T».*/
 
 
+import java.awt.*;
+
 public class Bender {
 
 
@@ -29,7 +31,6 @@ public class Bender {
 
 
     public String run(){
-        String movimiento = "";
         while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi)){
             System.out.println(bot.direccion.getDireccion(bot.movimiento));
             if (bot.moverse(this.map))
@@ -40,6 +41,18 @@ public class Bender {
                     System.out.println("pisado teleport");
                 if (bot.pisarInvertido(this.map))
                     System.out.println("pisado invertido");
+
+
+            for (int i = 0; i <map.map.length ; i++) {
+                for (int j = 0; j <map.map[i].length ; j++) {
+                    if (bot.posicion.equals(new Point(i,j)))
+                        System.out.print("o");
+                    else
+                        System.out.print(map.map[i][j]);
+                }
+                System.out.println("");
+            }
+
 
         }
         return bot.path;

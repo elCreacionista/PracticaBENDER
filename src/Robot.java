@@ -85,11 +85,14 @@ public class Robot {
                 if (invertido){
                     invertido = false;
                     movimiento += 2;
+                    this.siguienteposicion = this.siguientePosicion();
                     return true;
                 }
                 else{
                     invertido = true;
                     movimiento += 2;
+                    this.siguienteposicion = this.siguientePosicion();
+
                     return true;
                 }
             }
@@ -98,8 +101,7 @@ public class Robot {
     }
 
     public Point siguientePosicion(){
-        System.out.println(this.posicion.x + " " + this.posicion.y);
-        System.out.println(this.direccion);
+
 
         switch (this.direccion){
             case NORTH: return new Point(this.posicion.x - 1,this.posicion.y);
