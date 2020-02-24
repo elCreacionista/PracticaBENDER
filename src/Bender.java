@@ -30,23 +30,38 @@ public class Bender {
     }
 
 
-    public String run(){
-        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi)){
+    public String run() {
+        int pasos = 0;
+        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 100)) {
             System.out.println(bot.direccion.getDireccion(bot.movimiento));
             if (bot.moverse(this.map))
                 System.out.println("paso");
+            else bot.cambiarDireccion(this.map);
+
+            if (bot.pisarTeleport(this.map)) {
+                System.out.println("pisado teleport");
+                if (bot.moverse(this.map))
+                    System.out.println("paso");
                 else bot.cambiarDireccion(this.map);
+            }
+            if (bot.pisarInvertido(this.map)) {
+                System.out.println("pisado invertido");
+                if (bot.moverse(this.map))
+                    System.out.println("paso");
+                else bot.cambiarDireccion(this.map);
+            }
 
-                if (bot.pisarTeleport(this.map))
-                    System.out.println("pisado teleport");
-                if (bot.pisarInvertido(this.map))
-                    System.out.println("pisado invertido");
 
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
 
-            for (int i = 0; i <map.map.length ; i++) {
-                for (int j = 0; j <map.map[i].length ; j++) {
-                    if (bot.posicion.equals(new Point(i,j)))
+            for (int i = 0; i < map.map.length; i++) {
+                for (int j = 0; j < map.map[i].length; j++) {
+                    if (bot.posicion.equals(new Point(i, j)))
                         System.out.print("o");
+                    else if (map.map[i][j] instanceof Teleportador)
+                        System.out.print("T");
                     else
                         System.out.print(map.map[i][j]);
                 }
