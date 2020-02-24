@@ -31,6 +31,7 @@ public class Bender {
 
 
     public String run() {
+        if (!this.map.isValid()) return null;
         int pasos = 0;
         while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 100)) {
             System.out.println(bot.direccion.getDireccion(bot.movimiento));
@@ -43,6 +44,7 @@ public class Bender {
                 if (bot.moverse(this.map))
                     System.out.println("paso");
                 else bot.cambiarDireccion(this.map);
+
             }
             if (bot.pisarInvertido(this.map)) {
                 System.out.println("pisado invertido");

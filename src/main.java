@@ -29,14 +29,14 @@ public class main {
     public static void main(String[] args) {
         String mapa = "" +
                 "#############\n" +
-                "#T X        #\n" +
-                "#          I#\n" +
+                "# T    X    #\n" +
                 "#           #\n" +
                 "#           #\n" +
-                "##          #\n" +
-                "#           #\n" +
-                "#$          #\n" +
-                "#T$         #\n" +
+                "#      I    #\n" +
+                "#############\n" +
+                "#   #  ###  #\n" +
+                "#   ####T   #\n" +
+                "#    $      #\n" +
                 "#############";
         System.out.println(mapa);
 

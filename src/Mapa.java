@@ -13,6 +13,9 @@ public class Mapa {
         inversores = getInversors();
     }
 
+    public boolean isValid(){
+        return getEnd() != null;
+    }
 
     public char[][] createMap(String mapa) {
 
