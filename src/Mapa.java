@@ -16,19 +16,19 @@ public class Mapa {
     public boolean isValid(){
         if (getEnd() == null)
             return false;
+        if (getError())
+            return false;
 
         return true;
     }
 
     public char[][] createMap(String mapa) {
 
-        char[][] map;
+
         List<List<Character>> listas = new ArrayList<>();
         List<Character> linea = new ArrayList<>();
 
         for (int i = 0; i < mapa.length() ; i++) {
-
-
             if (mapa.charAt(i) != '\n') {
                 linea.add(mapa.charAt(i));
             }
@@ -42,7 +42,7 @@ public class Mapa {
         }
 
 
-        map = new char[listas.size()][];
+        char[][] map = new char[listas.size()][];
 
         for (int i = 0; i < map.length ; i++) {
             map[i] = new char[listas.get(i).size()];
@@ -70,7 +70,7 @@ public class Mapa {
                     case 'T': this.map[i][j] = new Teleportador(); break;
                     case 'I': this.map[i][j] = new Invers(); break;
                     default:
-                        System.out.println("smth went wrng");
+                        this.map[i][j] = new Error(); break;
                 }
 
             }
@@ -109,6 +109,17 @@ public class Mapa {
         }
 
         return t;
+    }
+
+    public boolean getError(){
+        for (int i = 0; i < this.map.length ; i++) {
+            for (int j = 0; j < this.map[i].length ; j++) {
+                if (this.map[i][j] instanceof Error) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public Point getBot(){
@@ -160,7 +171,7 @@ class Invers extends Casella{
 
     @Override
     public String toString(){
-        return "1";
+        return "I";
     }
 }
 class Teleportador extends Casella{
@@ -182,12 +193,18 @@ class Teleportador extends Casella{
 class Bot extends Casella{
     @Override
     public String toString(){
-        return "o";
+        return "X";
     }
 }
 class Fi extends Casella{
     @Override
     public String toString(){
-        return "x";
+        return "$";
+    }
+}
+class Error extends Casella{
+    @Override
+    public String toString(){
+        return "SOS";
     }
 }
