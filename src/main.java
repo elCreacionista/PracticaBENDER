@@ -29,7 +29,6 @@ public class main {
     public static void main(String[] args) {
         String mapa = "" +
                 "#############\n" +
-<<<<<<< HEAD
                 "#           #\n" +
                 "#          X#\n" +
                 "#           #\n" +
@@ -38,16 +37,6 @@ public class main {
                 "#           #\n" +
                 "#           #\n" +
                 "#      $    #\n" +
-=======
-                "# T    X    #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#      I    #\n" +
-                "#############\n" +
-                "#   #  ###  #\n" +
-                "#   ####T   #\n" +
-                "#    $      #\n" +
->>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
                 "#############";
         System.out.println(mapa);
 
