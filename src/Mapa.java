@@ -14,10 +14,14 @@ public class Mapa {
     }
 
     public boolean isValid(){
+<<<<<<< HEAD
         if (getEnd() == null)
             return false;
 
         return true;
+=======
+        return getEnd() != null;
+>>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
     }
 
     public char[][] createMap(String mapa) {

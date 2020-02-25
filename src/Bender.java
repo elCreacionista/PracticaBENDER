@@ -32,9 +32,14 @@ public class Bender {
 
     public String run() {
         if (!this.map.isValid()) return null;
+<<<<<<< HEAD
         System.out.println(map.isValid());
         int pasos = 0;
         while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 10000)) {
+=======
+        int pasos = 0;
+        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 100)) {
+>>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
             System.out.println(bot.direccion.getDireccion(bot.movimiento));
             if (bot.moverse(this.map))
                 System.out.println("paso");
@@ -53,12 +58,22 @@ public class Bender {
                     System.out.println("paso");
                 else bot.cambiarDireccion(this.map);
             }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
 
             System.out.println("");
             System.out.println("");
             System.out.println("");
 
+<<<<<<< HEAD
+            System.out.println("");
+            System.out.println("");
+            System.out.println("");
+
+=======
+>>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
             for (int i = 0; i < map.map.length; i++) {
                 for (int j = 0; j < map.map[i].length; j++) {
                     if (bot.posicion.equals(new Point(i, j)))
