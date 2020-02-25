@@ -15,7 +15,6 @@ public class Robot {
         this.posicion = p;
         this.direccion = Direccion.SOUTH;
         this.siguienteposicion = siguientePosicion();
-<<<<<<< HEAD
         camino = new ArrayList<>();
     }
 
@@ -39,8 +38,6 @@ public class Robot {
             }
         }
         return false;
-=======
->>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
     }
 
     public boolean moverse(Mapa map){
@@ -130,7 +127,6 @@ public class Robot {
                     distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
             }
             lista = new ArrayList<>();
-<<<<<<< HEAD
         }
 
         for (int i = 1; i < 1000 ; i++) {
@@ -139,16 +135,6 @@ public class Robot {
                 return distancias.get(i).get(0).point;
         }
 
-=======
-        }
-
-        for (int i = 1; i < 1000 ; i++) {
-            System.out.println(distancias.get(i));
-            if (distancias.containsKey(i))
-                return distancias.get(i).get(0).point;
-        }
-
->>>>>>> 86d3da915beb8004d38fde213eb454c237c4a42d
 
         return distancias.get(0).get(0).point;
 
