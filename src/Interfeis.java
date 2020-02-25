@@ -27,7 +27,7 @@ public class Interfeis extends JFrame {
                     case "I": labels[i][j].setBackground(new Color(100,200,200));labels[i][j].setText("Inversor");break;
                     case "T": labels[i][j].setBackground(new Color(250,100,50));labels[i][j].setText("Teleportador");break;
                     case "$": labels[i][j].setBackground(new Color(200,250,0));labels[i][j].setText("Fi");break;
-                    default: labels[i][j].setBackground(new Color(255,255,255));labels[i][j].setText("Fi");break;
+                    default: labels[i][j].setBackground(new Color(255,255,255));labels[i][j].setText("Error");break;
                 }
                 panel.add(labels[i][j]);
             }

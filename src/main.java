@@ -40,15 +40,15 @@ public class main {
     public static void main(String[] args) {
 
         String mapa = "" +
-                "   #######\n" +
-                "   # XTI #\n" +
-                "   #    $#\n" +
-                "#### J  #####\n" +
-                "#          T#\n" +
-                "####     ####\n" +
-                "   #    I#\n" +
-                "   #     #\n" +
-                "   #######";
+                "###########\n" +
+                "#    X    #\n" +
+                "#         #\n" +
+                "#  T   T  #\n" +
+                "#    T $  #\n" +
+                "#  T   T  #\n" +
+                "#         #\n" +
+                "#         #\n" +
+                "###########";
         System.out.println(mapa);
 
 
@@ -56,7 +56,7 @@ public class main {
 
 
         Bender bot = new Bender(mapa);
-        //Interfeis in = new Interfeis(bot.map, bot.bot);
+        Interfeis in = new Interfeis(bot.map, bot.bot);
         bot.run();
         System.out.println(bot.bot.bucle());
         System.out.println(bot.bot.path);
