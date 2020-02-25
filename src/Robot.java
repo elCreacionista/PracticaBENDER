@@ -1,48 +1,90 @@
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 public class Robot {
     Point posicion;
     Point siguienteposicion;
     Direccion direccion;
     boolean invertido = false;
+    boolean teleportado = false;
     int movimiento = 0;
     String path = "";
+    List<Point> camino;
     Robot(Mapa map, Point p){
         this.posicion = p;
-        direccion = Direccion.SOUTH;
-        siguienteposicion = siguientePosicion();
+        this.direccion = Direccion.SOUTH;
+        this.siguienteposicion = siguientePosicion();
+        camino = new ArrayList<>();
+    }
+
+
+    public boolean bucle() {
+        System.out.println(camino);
+        for (int i = 0; i < camino.size(); i++) {
+            for (int j = 0; j < camino.size(); j++) {
+                if (i < j)
+                    if (camino.get(i).equals(camino.get(j))) {
+                        System.out.println("coinsicensia");
+                        List<Point> sublist = camino.subList(i, j);
+                        System.out.println(sublist);
+                        List<Point> subsublist1 = sublist.subList(0, sublist.size() / 2);
+                        List<Point> subsublist2 = sublist.subList(sublist.size() / 2, sublist.size());
+                        System.out.println(subsublist1);
+                        System.out.println(subsublist2);
+                        if (subsublist1.equals(subsublist2))
+                            return true;
+                    }
+            }
+        }
+        return false;
     }
 
     public boolean moverse(Mapa map){
         System.out.println(siguienteposicion.x + " " + siguienteposicion.y);
         if (!(map.map[siguienteposicion.x][siguienteposicion.y] instanceof Pared)) {
+            this.camino.add(this.posicion);
             this.posicion = this.siguienteposicion;
-            siguienteposicion = siguientePosicion();
-            this.path += this.direccion.getChar();
+            this.siguienteposicion = siguientePosicion();
+            if (!this.teleportado) {
+                this.path += this.direccion.getChar();
+
+            }
+            teleportado = false;
             return true;
         }
         else {
-            this.movimiento += 1;
+            return false;
         }
-        return false;
+
     }
     //ordre: S (South), E (East), N (North), W (West).
     //direccions: N (North), W(West), S (South), E (East).
     public void cambiarDireccion(Mapa map) {
 
+        if (this.invertido) {
+            this.movimiento = 2;
+        }
+        else {
+            this.movimiento = 0;
+        }
 
-        this.movimiento++;
-        this.direccion = direccion.getDireccion(this.movimiento);
-        siguienteposicion = siguientePosicion();
+        while (map.map[siguienteposicion.x][siguienteposicion.y] instanceof Pared) {
+
+            System.out.println(this.direccion);
+            this.direccion = direccion.getDireccion(this.movimiento);
+            this.siguienteposicion = siguientePosicion();
+            this.movimiento++;
+        }
 
     }
 
-    public boolean pisarTeleport(Mapa map){
+
+    public boolean pisarTeleport (Mapa map){
         for (int i = 0; i < map.teletransportadores.length ; i++) {
             if (this.posicion.equals(map.teletransportadores[i].point)){
-                this.siguienteposicion = getTeleportadorObjetivo(map,map.teletransportadores[i]).point;
+                this.siguienteposicion = getTeleportadorObjetivo(map,map.teletransportadores[i]);
+                this.teleportado = true;
                 return true;
             }
         }
@@ -52,30 +94,49 @@ public class Robot {
     public int getDistancia(Teleportador tel, Teleportador objetivo){
         Point inicio = tel.point;
         Point destino = objetivo.point;
-            int distancia = 0;
-            if (destino.x == inicio.x && destino.y == inicio.y)
-                return 0;
+        int distancia = 0;
+        if (destino.x == inicio.x && destino.y == inicio.y)
+            return 0;
 
-            if (destino.x < inicio.x )
-                distancia += inicio.x - destino.x;
-            else
-                distancia += destino.x - inicio.x;
+        if (destino.x < inicio.x )
+            distancia += inicio.x - destino.x;
+        else
+            distancia += destino.x - inicio.x;
 
-            if (destino.y < inicio.y )
-                distancia += inicio.y - destino.y;
-            else
-                distancia += destino.y - inicio.y;
+        if (destino.y < inicio.y )
+            distancia += inicio.y - destino.y;
+        else
+            distancia += destino.y - inicio.y;
 
-            return distancia;
+        return distancia;
 
     }
 
-    public Teleportador getTeleportadorObjetivo(Mapa map, Teleportador tel){
-        Map<Integer, Teleportador> distancias = new HashMap<>();
+    public Point getTeleportadorObjetivo(Mapa map, Teleportador tel){
+        Map<Integer, List<Teleportador>> distancias = new HashMap<>();
         for (int i = 0; i < map.teletransportadores.length; i++) {
-            distancias.put(getDistancia(map.teletransportadores[i], tel), map.teletransportadores[i]);
+            List<Teleportador> lista = new ArrayList<>();
+            lista.add(map.teletransportadores[i]);
+            if (distancias.isEmpty())
+                distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
+            else{
+                if (distancias.containsKey(getDistancia(map.teletransportadores[i], tel))) {
+                    distancias.get(getDistancia(map.teletransportadores[i], tel)).add(map.teletransportadores[i]);
+                }
+                else
+                    distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
+            }
+            lista = new ArrayList<>();
         }
-        return distancias.get(2);
+
+        for (int i = 1; i < 1000 ; i++) {
+            System.out.println(distancias.get(i));
+            if (distancias.containsKey(i))
+                return distancias.get(i).get(0).point;
+        }
+
+
+        return distancias.get(0).get(0).point;
 
     }
 
@@ -83,15 +144,11 @@ public class Robot {
         for (int i = 0; i < map.inversores.length ; i++) {
             if (this.posicion.equals(map.inversores[i].point)){
                 if (invertido){
-                    invertido = false;
-                    movimiento += 2;
-                    this.siguienteposicion = this.siguientePosicion();
+                    this.invertido = false;
                     return true;
                 }
                 else{
-                    invertido = true;
-                    movimiento += 2;
-                    this.siguienteposicion = this.siguientePosicion();
+                    this.invertido = true;
 
                     return true;
                 }

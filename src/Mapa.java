@@ -13,6 +13,12 @@ public class Mapa {
         inversores = getInversors();
     }
 
+    public boolean isValid(){
+        if (getEnd() == null)
+            return false;
+
+        return true;
+    }
 
     public char[][] createMap(String mapa) {
 
@@ -93,7 +99,7 @@ public class Mapa {
             for (int j = 0; j < this.map[i].length ; j++) {
                 if (map[i][j] instanceof Teleportador) {
                     lista.add(new Point(i, j));
-                    map[i][j] = new Buid();
+                    //map[i][j] = new Buid();
                 }
             }
         }
@@ -161,6 +167,11 @@ class Teleportador extends Casella{
     Teleportador(){}
     Teleportador(Point t){
         this.point = t;
+    }
+
+
+    public int compareTo(){
+        return 1;
     }
 
     @Override
