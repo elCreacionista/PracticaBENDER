@@ -18,9 +18,53 @@ public class Mapa {
             return false;
         if (getError())
             return false;
+        if (teletransportadores.length == 1)
+            return false;
 
         return true;
     }
+
+
+    public boolean comprovarBorder(){
+        Point comprovacion = null;
+        Point posicioninicial;
+        int j = 0;
+        while (comprovacion == null){
+            for (int i = 0; i < map[j].length; i++) {
+                if (map[j][i] instanceof Pared) {
+                    comprovacion = new Point(j, i);
+                    break;
+                }
+            }
+            j++;
+        }
+        posicioninicial = new Point( comprovacion.x, comprovacion.y);
+        if (map[comprovacion.x][comprovacion.y + 1] instanceof Pared)
+        comprovacion.y++;
+        while (!comprovacion.equals(posicioninicial)){
+
+            System.out.println("Point1: " + posicioninicial.x + " " + posicioninicial.y);
+            System.out.println("Point2: " + comprovacion.x + " " + comprovacion.y);
+
+            while (comprovacion.y < map.length && map[comprovacion.x][comprovacion.y + 1] instanceof Pared) {
+                comprovacion.y++;
+            }
+            while (comprovacion.y > 0 && map[comprovacion.x][comprovacion.y - 1] instanceof Pared) {
+                comprovacion.y--;
+            }
+            while (comprovacion.x + 1 < map[comprovacion.y].length && map[comprovacion.x + 1][comprovacion.y] instanceof Pared) {
+                comprovacion.x++;
+            }
+            while (comprovacion.x > 0 && map[comprovacion.x - 1][comprovacion.y] instanceof Pared) {
+                comprovacion.x--;
+            }
+
+            if (!comprovacion.equals(posicioninicial))
+            return false;
+        }
+        return true;
+    }
+
 
     public char[][] createMap(String mapa) {
 

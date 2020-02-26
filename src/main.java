@@ -2,16 +2,29 @@ import java.util.Arrays;
 
 
 /* String mapa = "" +
-                "#############\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#           #\n" +
-                "#############";
+                "##################\n" +
+                "#                #\n" +
+                "#         T      #\n" +
+                "#         $      #\n" +
+                "#         X      #\n" +
+                "#      T  T  T   #\n" +
+                "#      $     $   #\n" +
+                "#                #\n" +
+                "#         T      #\n" +
+                "#         $      #\n" +
+                "#                #\n" +
+                "##################";
+String mapa = "" +
+                "##################\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "#                #\n" +
+                "##################";
                 String mapa = "" +
                 "#############\n" +
                 "# T    X    #\n" +
@@ -23,7 +36,7 @@ import java.util.Arrays;
                 "#   ####T   #\n" +
                 "#    $      #\n" +
                 "#############";
-                String mapa = "" +
+String mapa = "" +
                 "#############\n" +
                 "#           #\n" +
                 "#          X#\n" +
@@ -40,27 +53,47 @@ public class main {
     public static void main(String[] args) {
 
         String mapa = "" +
-                "###########\n" +
-                "#    X    #\n" +
-                "#         #\n" +
-                "#  T   T  #\n" +
-                "#    T $  #\n" +
-                "#  T   T  #\n" +
-                "#         #\n" +
-                "#         #\n" +
-                "###########";
+                "##########################\n" +
+                "######               I  T#\n" +
+                "#T   #                  ##\n" +
+                "#### #                   #\n" +
+                "#  # #############       #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  # #                   #\n" +
+                "#  #X#                   #\n" +
+                "#  #I#                   #\n" +
+                "# T###T                  #\n" +
+                "# $                      #\n" +
+                "##########################";
         System.out.println(mapa);
 
 
         Mapa xd = new Mapa(mapa);
 
+        //System.out.println(xd.comprovarBorder());
 
         Bender bot = new Bender(mapa);
-        Interfeis in = new Interfeis(bot.map, bot.bot);
-        bot.run();
-        Interfeis inte = new Interfeis(bot.map, bot.bot);
+        Interfeis in = new Interfeis(bot);
+        //bot.run();
+        //Interfeis inte = new Interfeis(bot);
 
-        System.out.println(bot.bot.bucle());
-        System.out.println(bot.bot.path);
+        System.out.println("Hay un bucle: " + bot.bot.bucle());
+        System.out.println("El camino: " + bot.bot.path);
     }
 }

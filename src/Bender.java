@@ -30,37 +30,38 @@ public class Bender {
     }
 
 
-    public String run() {
-        if (!this.map.isValid()) return null;
-        System.out.println("Is valid: " + map.isValid());
-        int pasos = 0;
-        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 10000)) {
+    public void unPaso(){
+        if (bot.moverse(this.map))
+            System.out.print("");
+        else bot.cambiarDireccion(this.map);
+
+        if (bot.pisarTeleport(this.map)) {
+
             if (bot.moverse(this.map))
                 System.out.print("");
             else bot.cambiarDireccion(this.map);
 
-            if (bot.pisarTeleport(this.map)) {
+        }
+        if (bot.pisarInvertido(this.map)) {
+
+            if (bot.moverse(this.map))
                 System.out.print("");
-                if (bot.moverse(this.map))
-                    System.out.print("");
-                else bot.cambiarDireccion(this.map);
-
-            }
-            if (bot.pisarInvertido(this.map)) {
-
-                if (bot.moverse(this.map))
-                    System.out.print("");
-                else bot.cambiarDireccion(this.map);
-            }
+            else bot.cambiarDireccion(this.map);
+        }
+    }
 
 
-
-
+    public String run() {
+        System.out.println("És valid: " + map.isValid());
+        if (!this.map.isValid()) return null;
+        System.out.println("Is valid: " + map.isValid());
+        int pasos = 0;
+        while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 10000)) {
+            unPaso();
             if (pasos%100 == 0)
             if (bot.bucle())
                 return null;
         }
-
         return bot.path;
     }
 

@@ -109,13 +109,11 @@ public class Robot {
         for (int i = 0; i < map.teletransportadores.length; i++) {
             if (!map.teletransportadores[i].equals(tel)) {
                 Map<Integer, Teleportador> lista = new HashMap<>();
-                System.out.println("Aqui no se repiten los keys. KEYS: " + getDistancia(map.teletransportadores[i], tel));
                 lista.put(calculateAngle(map.teletransportadores[i].point, tel.point), map.teletransportadores[i]);
                 if (distancias.isEmpty())
                     distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
                 else {
                     if (distancias.containsKey(getDistancia(map.teletransportadores[i], tel))) {
-                        System.out.println("Ahora se repiten los keys. KEYS: " + getDistancia(map.teletransportadores[i], tel));
                         distancias.get(getDistancia(map.teletransportadores[i], tel)).put(calculateAngle(map.teletransportadores[i].point, tel.point), map.teletransportadores[i]);
                     } else
                         distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
@@ -143,26 +141,21 @@ public class Robot {
 
     public int calculateAngle(Point point1, Point point2){
         Point vector = new Point(point1.x - point2.x, point1.y - point2.y);
-        System.out.println("point1: " + point1.x + " " + point1.y);
-        System.out.println("point2: " + point2.x + " " + point2.y);
-        System.out.println("point: " + vector.x + " " + vector.y);
 
 
 
         if (vector.x == 0 && vector.y > 0)
-            return 180;
-        if (vector.x == 0 && vector.y < 0)
-            return 360;
-        if (vector.y == 0 && vector.x > 0)
             return 90;
-        if (vector.y == 0 && vector.x < 0)
+        if (vector.x == 0 && vector.y < 0)
             return 270;
+        if (vector.y == 0 && vector.x > 0)
+            return 180;
+        if (vector.y == 0 && vector.x < 0)
+            return 0;
 
         double hip = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
         double anguloT = Math.toDegrees(Math.acos(vector.y / hip));
 
-        System.out.println("Hipotenusa: " + hip);
-        System.out.println("Angulo: " + anguloT);
         if (vector.x < 0 && vector.y > 0)
             return (int) anguloT;
 
