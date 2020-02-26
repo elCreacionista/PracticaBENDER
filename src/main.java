@@ -58,6 +58,8 @@ public class main {
         Bender bot = new Bender(mapa);
         Interfeis in = new Interfeis(bot.map, bot.bot);
         bot.run();
+        Interfeis inte = new Interfeis(bot.map, bot.bot);
+
         System.out.println(bot.bot.bucle());
         System.out.println(bot.bot.path);
     }

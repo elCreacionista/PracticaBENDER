@@ -32,50 +32,34 @@ public class Bender {
 
     public String run() {
         if (!this.map.isValid()) return null;
-        System.out.println(map.isValid());
+        System.out.println("Is valid: " + map.isValid());
         int pasos = 0;
         while (!(this.map.map[bot.posicion.x][bot.posicion.y] instanceof Fi || pasos++ == 10000)) {
-            System.out.println(bot.direccion.getDireccion(bot.movimiento));
             if (bot.moverse(this.map))
-                System.out.println("paso");
+                System.out.print("");
             else bot.cambiarDireccion(this.map);
 
             if (bot.pisarTeleport(this.map)) {
-                System.out.println("pisado teleport");
+                System.out.print("");
                 if (bot.moverse(this.map))
-                    System.out.println("paso");
+                    System.out.print("");
                 else bot.cambiarDireccion(this.map);
 
             }
             if (bot.pisarInvertido(this.map)) {
-                System.out.println("pisado invertido");
+
                 if (bot.moverse(this.map))
-                    System.out.println("paso");
+                    System.out.print("");
                 else bot.cambiarDireccion(this.map);
             }
 
 
-            System.out.println("");
-            System.out.println("");
-            System.out.println("");
 
-            for (int i = 0; i < map.map.length; i++) {
-                for (int j = 0; j < map.map[i].length; j++) {
-                    if (bot.posicion.equals(new Point(i, j)))
-                        System.out.print("o");
-                    else if (map.map[i][j] instanceof Teleportador)
-                        System.out.print("T");
-                    else
-                        System.out.print(map.map[i][j]);
-                }
-                System.out.println("");
-            }
 
             if (pasos%100 == 0)
             if (bot.bucle())
                 return null;
         }
-        System.out.println(bot.camino);
 
         return bot.path;
     }

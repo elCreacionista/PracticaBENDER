@@ -20,18 +20,13 @@ public class Robot {
 
 
     public boolean bucle() {
-        System.out.println(camino);
         for (int i = 0; i < camino.size(); i++) {
             for (int j = 0; j < camino.size(); j++) {
                 if (i < j)
                     if (camino.get(i).equals(camino.get(j))) {
-                        System.out.println("coinsicensia");
                         List<Point> sublist = camino.subList(i, j);
-                        System.out.println(sublist);
                         List<Point> subsublist1 = sublist.subList(0, sublist.size() / 2);
                         List<Point> subsublist2 = sublist.subList(sublist.size() / 2, sublist.size());
-                        System.out.println(subsublist1);
-                        System.out.println(subsublist2);
                         if (subsublist1.equals(subsublist2))
                             return true;
                     }
@@ -41,7 +36,6 @@ public class Robot {
     }
 
     public boolean moverse(Mapa map){
-        System.out.println(siguienteposicion.x + " " + siguienteposicion.y);
         if (!(map.map[siguienteposicion.x][siguienteposicion.y] instanceof Pared)) {
             this.camino.add(this.posicion);
             this.posicion = this.siguienteposicion;
@@ -70,8 +64,6 @@ public class Robot {
         }
 
         while (map.map[siguienteposicion.x][siguienteposicion.y] instanceof Pared) {
-
-            System.out.println(this.direccion);
             this.direccion = direccion.getDireccion(this.movimiento);
             this.siguienteposicion = siguientePosicion();
             this.movimiento++;
@@ -115,19 +107,21 @@ public class Robot {
     public Point getTeleportadorObjetivo(Mapa map, Teleportador tel){
         Map<Integer, Map<Integer,Teleportador>> distancias = new HashMap<>();
         for (int i = 0; i < map.teletransportadores.length; i++) {
-            Map<Integer,Teleportador> lista = new HashMap<>();
-            lista.put(calculateAngle(map.teletransportadores[i].point, tel.point),map.teletransportadores[i]);
-            if (distancias.isEmpty())
-                distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
-            else{
-                if (distancias.containsKey(getDistancia(map.teletransportadores[i], tel))) {
-                    distancias.get(getDistancia(map.teletransportadores[i], tel)).put(calculateAngle(map.teletransportadores[i].point, tel.point),map.teletransportadores[i]);
-                }
-                else
+            if (!map.teletransportadores[i].equals(tel)) {
+                Map<Integer, Teleportador> lista = new HashMap<>();
+                System.out.println("Aqui no se repiten los keys. KEYS: " + getDistancia(map.teletransportadores[i], tel));
+                lista.put(calculateAngle(map.teletransportadores[i].point, tel.point), map.teletransportadores[i]);
+                if (distancias.isEmpty())
                     distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
+                else {
+                    if (distancias.containsKey(getDistancia(map.teletransportadores[i], tel))) {
+                        System.out.println("Ahora se repiten los keys. KEYS: " + getDistancia(map.teletransportadores[i], tel));
+                        distancias.get(getDistancia(map.teletransportadores[i], tel)).put(calculateAngle(map.teletransportadores[i].point, tel.point), map.teletransportadores[i]);
+                    } else
+                        distancias.put(getDistancia(map.teletransportadores[i], tel), lista);
+                }
             }
         }
-
         for (int i = 1; i < 1000 ; i++) {
             if (distancias.containsKey(i))
                 for (int j = 0; j < 1000; j++) {
@@ -148,8 +142,41 @@ public class Robot {
         return (int) (Math.pow(Math.cos(Math.floorDiv(dotp, (int) (lenghtP1 * lenghtP2))), -1));*/
 
     public int calculateAngle(Point point1, Point point2){
+        Point vector = new Point(point1.x - point2.x, point1.y - point2.y);
+        System.out.println("point1: " + point1.x + " " + point1.y);
+        System.out.println("point2: " + point2.x + " " + point2.y);
+        System.out.println("point: " + vector.x + " " + vector.y);
 
-        return 1;
+
+
+        if (vector.x == 0 && vector.y > 0)
+            return 180;
+        if (vector.x == 0 && vector.y < 0)
+            return 360;
+        if (vector.y == 0 && vector.x > 0)
+            return 90;
+        if (vector.y == 0 && vector.x < 0)
+            return 270;
+
+        double hip = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+        double anguloT = Math.toDegrees(Math.acos(vector.y / hip));
+
+        System.out.println("Hipotenusa: " + hip);
+        System.out.println("Angulo: " + anguloT);
+        if (vector.x < 0 && vector.y > 0)
+            return (int) anguloT;
+
+        if (vector.x > 0 && vector.y > 0)
+            return (int) anguloT + 90;
+
+        if (vector.x > 0 && vector.y < 0)
+            return (int) anguloT + 180;
+
+        if (vector.x < 0 && vector.y < 0)
+            return (int) anguloT + 270;
+
+
+        return (int) anguloT;
     }
 
     public boolean pisarInvertido(Mapa map){

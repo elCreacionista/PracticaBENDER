@@ -16,6 +16,7 @@ public class Interfeis extends JFrame {
                 labels[i][j] = new JLabel();
                 labels[i][j].setOpaque(true);
                 labels[i][j].setBounds(j*50,i*50,50,50);
+                labels[i][j].setText(i + " " + j);
                 if (bot.posicion.equals(new Point(i,j))) {
                     labels[i][j].setBackground(new Color(150, 150, 150));
                     labels[i][j].setText("BOT");
