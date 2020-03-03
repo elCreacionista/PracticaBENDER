@@ -18,7 +18,7 @@ public class Interfeis extends JFrame {
         boton.setBounds(350,400,100,30);
         boton.addActionListener(actionEvent -> {
             if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
-                bender.unPaso();
+                bender.paLante();
                 actualizarVista(bender);
             }
         });

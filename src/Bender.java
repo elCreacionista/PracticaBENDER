@@ -69,62 +69,72 @@ public class Bender {
     }
 
 
+    Point pointdelrun;
+    int distanciaactual;
     public int bestRun() {
 
-        Point pointdelrun = bot.posicion;
-        map.map[pointdelrun.x][pointdelrun.y].setDistancia(Caminos.getDistancia(pointdelrun, map.getEnd()));
+        pointdelrun = bot.posicion;
+        //map.map[pointdelrun.x][pointdelrun.y].setDistancia(Caminos.getDistancia(pointdelrun, map.getEnd()));
+        map.map[pointdelrun.x][pointdelrun.y].setDistancia(0);
 
 
 
-        int distanciaactual; //= map.map[pointdelrun.x][pointdelrun.y].getDistancia();
-        while (!pointdelrun.equals(new Point(map.getEnd().x, map.getEnd().y))) {
+         //= map.map[pointdelrun.x][pointdelrun.y].getDistancia();
+        /*while (!pointdelrun.equals(new Point(map.getEnd().x, map.getEnd().y))) {
 
-            distanciaactual = 1000;
-
-            map.map[pointdelrun.x][pointdelrun.y].explorado = true;
+            paLante();
 
 
-            for (int i = 0; i < map.teletransportadores.length ; i++) {
-                if (pointdelrun.equals(map.teletransportadores[i].point)){
-                    pointdelrun = this.bot.getTeleportadorObjetivo(map,map.teletransportadores[i]);
-                    break;
+        }*/
+        return map.map[bot.posicion.x][bot.posicion.y].getDistancia();
+    }
+    public void paLante(){
+        distanciaactual = 1000;
+
+        map.map[pointdelrun.x][pointdelrun.y].explorado = true;
+
+
+        for (int i = 0; i < map.teletransportadores.length ; i++) {
+            if (pointdelrun.equals(map.teletransportadores[i].point)){
+                pointdelrun = this.bot.getTeleportadorObjetivo(map,map.teletransportadores[i]);
+                break;
+            }
+        }
+
+
+        if (!(map.map[pointdelrun.x + 1][pointdelrun.y] instanceof Pared) && !map.map[pointdelrun.x + 1][pointdelrun.y].explorado) {
+            //map.map[pointdelrun.x + 1][pointdelrun.y].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x + 1,pointdelrun.y), map.getEnd()) + Caminos.getDistancia(new Point(pointdelrun.x + 1,pointdelrun.y), bot.posicion));
+            map.map[pointdelrun.x + 1][pointdelrun.y].setDistancia(map.map[pointdelrun.x][pointdelrun.y].getDistancia() + 1);
+        }
+
+        if (!(map.map[pointdelrun.x - 1][pointdelrun.y] instanceof Pared) && !map.map[pointdelrun.x - 1][pointdelrun.y].explorado) {
+            //map.map[pointdelrun.x - 1][pointdelrun.y].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x - 1,pointdelrun.y), map.getEnd()) + Caminos.getDistancia(new Point(pointdelrun.x - 1,pointdelrun.y), bot.posicion));
+            map.map[pointdelrun.x - 1][pointdelrun.y].setDistancia(map.map[pointdelrun.x][pointdelrun.y].getDistancia() + 1);
+        }
+
+        if (!(map.map[pointdelrun.x][pointdelrun.y + 1] instanceof Pared) && !map.map[pointdelrun.x][pointdelrun.y + 1].explorado) {
+            //map.map[pointdelrun.x][pointdelrun.y + 1].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y + 1), map.getEnd()) + Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y + 1), bot.posicion));
+            map.map[pointdelrun.x][pointdelrun.y + 1].setDistancia(map.map[pointdelrun.x][pointdelrun.y].getDistancia() + 1);
+        }
+
+        if (!(map.map[pointdelrun.x][pointdelrun.y - 1] instanceof Pared) && !map.map[pointdelrun.x][pointdelrun.y - 1].explorado) {
+            //map.map[pointdelrun.x][pointdelrun.y - 1].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y - 1), map.getEnd()) + Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y - 1), bot.posicion));
+            map.map[pointdelrun.x][pointdelrun.y - 1].setDistancia(map.map[pointdelrun.x][pointdelrun.y].getDistancia() + 1);
+        }
+
+
+        //System.out.println("hola");
+
+        for (int i = 0; i < map.map.length ; i++) {
+            for (int j = 0; j < map.map[i].length; j++) {
+                if (map.map[i][j].getDistancia() < distanciaactual && !map.map[i][j].explorado) {
+                    pointdelrun = new Point(i, j);
+                    distanciaactual = map.map[i][j].getDistancia();
+                    System.out.println(map.map[i][j].getDistancia() + " " + distanciaactual);
+
                 }
             }
-
-
-            if (!(map.map[pointdelrun.x + 1][pointdelrun.y] instanceof Pared) && !map.map[pointdelrun.x + 1][pointdelrun.y].explorado) {
-                map.map[pointdelrun.x + 1][pointdelrun.y].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x + 1,pointdelrun.y), map.getEnd()));
-            }
-
-            if (!(map.map[pointdelrun.x - 1][pointdelrun.y] instanceof Pared) && !map.map[pointdelrun.x - 1][pointdelrun.y].explorado) {
-                map.map[pointdelrun.x - 1][pointdelrun.y].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x - 1,pointdelrun.y), map.getEnd()));
-            }
-
-            if (!(map.map[pointdelrun.x][pointdelrun.y + 1] instanceof Pared) && !map.map[pointdelrun.x][pointdelrun.y + 1].explorado) {
-                map.map[pointdelrun.x][pointdelrun.y + 1].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y + 1), map.getEnd()));
-            }
-
-            if (!(map.map[pointdelrun.x][pointdelrun.y - 1] instanceof Pared) && !map.map[pointdelrun.x][pointdelrun.y - 1].explorado) {
-                map.map[pointdelrun.x][pointdelrun.y - 1].setDistancia(Caminos.getDistancia(new Point(pointdelrun.x,pointdelrun.y - 1), map.getEnd()));
-            }
-
-
-            //System.out.println("hola");
-
-            for (int i = 0; i < map.map.length ; i++) {
-                for (int j = 0; j < map.map[i].length; j++) {
-                    if (map.map[i][j].getDistancia() < distanciaactual && !map.map[i][j].explorado) {
-                        //System.out.println(map.map[i][j].getDistancia() + " " + distanciaactual);
-                        pointdelrun = new Point(i, j);
-                        distanciaactual = map.map[i][j].getDistancia();
-
-                    }
-                }
-
-            }
-
 
         }
-        return map.map[bot.posicion.x][bot.posicion.y].getDistancia();
     }
 }
