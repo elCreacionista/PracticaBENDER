@@ -12,10 +12,10 @@ public class Mapa {
             s.append('#');
         }
         list.add(s);
-        int randx1 = (int)(Math.random()*sizex - 3) + 1;
-        int randy1 = (int)(Math.random()*sizey - 3) + 1;
-        int randx2 = (int)(Math.random()*sizex - 3) + 1;
-        int randy2 = (int)(Math.random()*sizey - 3) + 1;
+        int randx1 = (int)(Math.random()*sizex - 2) + 1;
+        int randy1 = (int)(Math.random()*sizey - 2) + 1;
+        int randx2 = (int)(Math.random()*sizex - 2) + 1;
+        int randy2 = (int)(Math.random()*sizey - 2) + 1;
         for (int i = 0; i < sizey; i++) {
             s = new StringBuilder();
             s.append('#');
@@ -249,6 +249,13 @@ public class Mapa {
 }
 class Casella{
     Point point;
+    int distancia;
+    public void setDistancia(int distancia){
+        this.distancia = distancia;
+    }
+    public int getDistancia(){
+        return this.distancia;
+    }
     @Override
     public String toString(){
         return "hola";

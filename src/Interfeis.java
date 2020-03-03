@@ -47,7 +47,8 @@ public class Interfeis extends JFrame {
                     case "$": labels[i][j].setBackground(new Color(200,250,0));labels[i][j].setText("$");break;
                     default: labels[i][j].setBackground(new Color(255,255,255));labels[i][j].setText("Error");break;
                 }
-                panel.add(labels[i][j]);
+                    //labels[i][j].setText(bender.map.map[i][j].distancia + "");
+                    panel.add(labels[i][j]);
             }
         }
         setVisible(true);

@@ -26,15 +26,18 @@ public class Bender {
 
     Bender(String mapa){
         this.map = new Mapa(mapa);
-        this.bot = new Robot(this.map, this.map.getBot());
+        this.bot = new Robot(this.map.getBot());
     }
 
 
     public void unPaso(){
         if (bot.moverse(this.map))
             System.out.print("");
-        else bot.cambiarDireccion(this.map);
+        else {
+            bot.cambiarDireccion(this.map);
+            bot.moverse(this.map);
 
+        }
         if (bot.pisarTeleport(this.map)) {
 
             if (bot.moverse(this.map))

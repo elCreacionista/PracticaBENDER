@@ -11,7 +11,7 @@ public class Robot {
     int movimiento = 0;
     String path = "";
     List<Point> camino;
-    Robot(Mapa map, Point p){
+    Robot(Point p){
         this.posicion = p;
         this.direccion = Direccion.SOUTH;
         this.siguienteposicion = siguientePosicion();

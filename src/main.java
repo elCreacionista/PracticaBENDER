@@ -83,7 +83,7 @@ public class main {
 
 
 
-        String mapa = Mapa.MetodoPere(20,20);
+        String mapa = Mapa.MetodoPere(40,30);
         System.out.println(mapa);
 
 
