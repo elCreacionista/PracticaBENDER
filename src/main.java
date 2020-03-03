@@ -83,7 +83,19 @@ public class main {
 
 
 
-        String mapa = Mapa.MetodoPere(40,30);
+        //String mapa = Mapa.MetodoPere(20,20);
+
+        String mapa = "" +
+                "##################\n" +
+                "#  T  X  #       #\n" +
+                "#        #  #### #\n" +
+                "#        #  #    #\n" +
+                "#    #####  # ####\n" +
+                "#           #    #\n" +
+                "##############   #\n" +
+                "#                #\n" +
+                "#        T    $  #\n" +
+                "##################";
         System.out.println(mapa);
 
 
@@ -91,12 +103,13 @@ public class main {
 
         //System.out.println(xd.comprovarBorder());
 
-        Bender bot = new Bender(mapa);
-        Interfeis in = new Interfeis(bot);
+        Bender bender = new Bender(mapa);
+        System.out.println(bender.bestRun());
+        Interfeis in = new Interfeis(bender);
         //bot.run();
         //Interfeis inte = new Interfeis(bot);
 
-        System.out.println("Hay un bucle: " + bot.bot.bucle());
-        System.out.println("El camino: " + bot.bot.path);
+        System.out.println("Hay un bucle: " + bender.bot.bucle());
+        System.out.println("El camino: " + bender.bot.path);
     }
 }

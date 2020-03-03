@@ -10,6 +10,7 @@ public class Robot {
     boolean teleportado = false;
     int movimiento = 0;
     String path = "";
+    int pasos= 0;
     List<Point> camino;
     Robot(Point p){
         this.posicion = p;

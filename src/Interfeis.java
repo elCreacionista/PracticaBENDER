@@ -10,7 +10,6 @@ public class Interfeis extends JFrame {
     Container panel;
     JButton boton;
     Interfeis(Bender bender){
-        new JFrame("Test14");
         setLocationRelativeTo(null);
         panel = new Container();
         boton = new JButton();
@@ -47,7 +46,7 @@ public class Interfeis extends JFrame {
                     case "$": labels[i][j].setBackground(new Color(200,250,0));labels[i][j].setText("$");break;
                     default: labels[i][j].setBackground(new Color(255,255,255));labels[i][j].setText("Error");break;
                 }
-                    //labels[i][j].setText(bender.map.map[i][j].distancia + "");
+                    labels[i][j].setText(bender.map.map[i][j].distancia + "");
                     panel.add(labels[i][j]);
             }
         }
@@ -85,6 +84,7 @@ public class Interfeis extends JFrame {
                             labels[i][j].setText("Error");
                             break;
                     }
+                labels[i][j].setText(bender.map.map[i][j].distancia + "");
             }
         }
     }
