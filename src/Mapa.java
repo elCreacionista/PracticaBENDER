@@ -3,6 +3,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mapa {
+
+    static public String MetodoPere(int sizex, int sizey){
+        List<StringBuilder> list = new ArrayList<>();
+        StringBuilder s = new StringBuilder();
+
+        for (int i = 0; i < sizex; i++) {
+            s.append('#');
+        }
+        list.add(s);
+        int randx1 = (int)(Math.random()*sizex - 3) + 1;
+        int randy1 = (int)(Math.random()*sizey - 3) + 1;
+        int randx2 = (int)(Math.random()*sizex - 3) + 1;
+        int randy2 = (int)(Math.random()*sizey - 3) + 1;
+        for (int i = 0; i < sizey; i++) {
+            s = new StringBuilder();
+            s.append('#');
+            for (int j = 0; j < sizex - 2; j++) {
+                if (i == randx1 && j == randy1) {
+                    s.append('X');
+                    continue;
+                }
+                if (i == randx2 && j == randy2) {
+                    s.append('$');
+                    continue;
+                }
+                switch ((int)(Math.random()*30)){
+                    case 0: case 1: s.append('I');break;
+                    case 2: case 3: s.append('T');break;
+                    case 4: case 5: case 6: case 7: case 8: s.append('#');break;
+                    default: s.append(' ');
+                }
+            }
+            s.append('#');
+            list.add(s);
+        }
+
+        s = new StringBuilder();
+        for (int i = 0; i < sizex; i++) {
+            s.append('#');
+        }
+        list.add(s);
+        String finalMap = "";
+        for (int i = 0; i < list.size()-1; i++) {
+            finalMap += list.get(i).toString() + "\n";
+        }
+        finalMap += list.get(list.size()-1);
+        System.out.println(finalMap);
+        return finalMap;
+
+    }
+
+
+
+
+
+
+
+
+
     Casella[][] map;
     Teleportador[] teletransportadores;
     Invers[] inversores;

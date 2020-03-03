@@ -18,9 +18,10 @@ public class Interfeis extends JFrame {
         add(boton);
         boton.setBounds(350,400,100,30);
         boton.addActionListener(actionEvent -> {
-            if (!bender.bot.posicion.equals(bender.map.getEnd()))
+            if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
                 bender.unPaso();
-            actualizarVista(bender);
+                actualizarVista(bender);
+            }
         });
         panel.setLocation(20,20);
         labels = new JLabel[bender.map.map.length][];

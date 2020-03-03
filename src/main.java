@@ -47,12 +47,7 @@ String mapa = "" +
                 "#           #\n" +
                 "#      $    #\n" +
                 "#############";
-                */
-
-public class main {
-    public static void main(String[] args) {
-
-        String mapa = "" +
+                String mapa = "" +
                 "##########################\n" +
                 "######               I  T#\n" +
                 "#T   #                  ##\n" +
@@ -81,6 +76,14 @@ public class main {
                 "# T###T                  #\n" +
                 "# $                      #\n" +
                 "##########################";
+                */
+
+public class main {
+    public static void main(String[] args) {
+
+
+
+        String mapa = Mapa.MetodoPere(20,20);
         System.out.println(mapa);
 
 
