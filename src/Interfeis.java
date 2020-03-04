@@ -1,49 +1,55 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Interfeis extends JFrame {
 
 
     JLabel[][] labels;
-    Container panel;
+    JPanel pane;
+    Container vista;
+    Container botones;
     JButton boton;
     JButton boton2;
     Interfeis(Bender bender){
-        setLocationRelativeTo(null);
-        panel = new Container();
+
+        pane = new JPanel();
+        botones = new Container();
+        vista = new Container();
+
         boton = new JButton();
         boton.setText("Run");
-        add(boton);
-        boton.setBounds(350,400,100,30);
+
+        boton2 = new JButton();
+        boton2.setText("BestRun");
+
+        add(pane);
+        pane.setLayout(new BorderLayout());
+        pane.add(vista, BorderLayout.CENTER);
+        pane.add(botones,BorderLayout.NORTH);
+        botones.setLayout(new FlowLayout());
+        botones.add(boton);
+        botones.setPreferredSize(new Dimension (200,100));
+        botones.add(boton2);
         boton.addActionListener(actionEvent -> {
             if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
                 bender.unPaso();
                 actualizarVista(bender);
             }
         });
-        boton2 = new JButton();
-        boton2.setText("BestRun");
-        add(boton2);
-        boton2.setBounds(350,350,100,30);
         boton2.addActionListener(actionEvent -> {
-            if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
-                bender.PasoInteligente();
-                actualizarVista(bender);
-            }
+            bender.PasoInteligente();
+            actualizarVista(bender);
         });
-        panel.setLocation(20,20);
         labels = new JLabel[bender.map.map.length][];
-        setSize(500,500);
+        setSize(800,800);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(panel);
+        vista.setLayout(new GridLayout(bender.map.map.length, bender.map.map[0].length));
         for (int i = 0; i <bender.map.map.length ; i++) {
             labels[i] = new JLabel[bender.map.map[i].length];
             for (int j = 0; j <labels[i].length ; j++) {
                 labels[i][j] = new JLabel();
                 labels[i][j].setOpaque(true);
-                labels[i][j].setBounds(j*20,i*20,20,20);
+                //labels[i][j].setBounds(j*20,i*20,20,20);
                 if (bender.bot.posicion.equals(new Point(i,j))) {
                     labels[i][j].setBackground(new Color(150, 150, 150));
                     labels[i][j].setText("X");
@@ -57,8 +63,8 @@ public class Interfeis extends JFrame {
                     case "$": labels[i][j].setBackground(new Color(200,250,0));labels[i][j].setText("$");break;
                     default: labels[i][j].setBackground(new Color(255,255,255));labels[i][j].setText("Error");break;
                 }
-                    labels[i][j].setText(bender.map.map[i][j].distancia + "");
-                    panel.add(labels[i][j]);
+                    //labels[i][j].setText(bender.map.map[i][j].distancia + "");
+                    vista.add(labels[i][j]);
             }
         }
         setVisible(true);
@@ -74,9 +80,11 @@ public class Interfeis extends JFrame {
                     switch (bender.map.map[i][j].toString()) {
                         case "#":
                             labels[i][j].setBackground(new Color(0, 0, 0));
+                            labels[i][j].setText("#");
                             break;
                         case " ":
                             labels[i][j].setBackground(new Color(200, 200, 200));
+                            labels[i][j].setText(" ");
                             break;
                         case "I":
                             labels[i][j].setBackground(new Color(100, 200, 200));
@@ -95,9 +103,7 @@ public class Interfeis extends JFrame {
                             labels[i][j].setText("Error");
                             break;
                     }
-                if (bender.map.map[i][j].getDistancia() > 100)
-                    labels[i][j].setText("-");
-                else
+                if (bender.map.map[i][j].getDistancia() < 100)
                     labels[i][j].setText(bender.map.map[i][j].distancia + "");
             }
         }

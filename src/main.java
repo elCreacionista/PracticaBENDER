@@ -83,8 +83,17 @@ public class main {
 
 
 
-        String mapa = Mapa.MetodoPere(20,20);
-
+        //String mapa = Mapa.MetodoPere(20,20);
+        String mapa = "" +
+                "   #######\n" +
+                "   # XTI #\n" +
+                "   #    $#\n" +
+                "####    #####\n" +
+                "#          T#\n" +
+                "####     ####\n" +
+                "   #    I#\n" +
+                "   #     #\n" +
+                "   #######";
         /*String mapa = "" +
                 "##################\n" +
                 "#     X #        #\n" +
