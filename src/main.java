@@ -83,28 +83,18 @@ public class main {
 
 
 
-        //String mapa = Mapa.MetodoPere(20,20);
-        String mapa = "" +
-                "   #######\n" +
-                "   # XTI #\n" +
-                "   #    $#\n" +
-                "####    #####\n" +
-                "#          T#\n" +
-                "####     ####\n" +
-                "   #    I#\n" +
-                "   #     #\n" +
-                "   #######";
+        String mapa = Mapa.MetodoPere(30,30);
         /*String mapa = "" +
-                "##################\n" +
-                "#     X #        #\n" +
-                "#  T    #     #  #\n" +
-                "#       #     #  #\n" +
-                "# #############  #\n" +
-                "#       #     #  #\n" +
-                "######  ##### #  #\n" +
-                "#       #     #  #\n" +
-                "#           $ # T#\n" +
-                "##################";*/
+                "#############\n" +
+                "#           #\n" +
+                "#          X#\n" +
+                "# T         #\n" +
+                "#############\n" +
+                "#     T     #\n" +
+                "#      ######\n" +
+                "#           #\n" +
+                "#      $    #\n" +
+                "#############";*/
         System.out.println(mapa);
 
 
@@ -114,6 +104,7 @@ public class main {
 
         Bender bender = new Bender(mapa);
         //System.out.println(bender.bestRun());
+        //System.out.println(bender.run());
         bender.MetodoParaLaInterfaz();
         Interfeis in = new Interfeis(bender);
         //bot.run();

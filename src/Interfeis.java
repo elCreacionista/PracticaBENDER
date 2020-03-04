@@ -41,7 +41,7 @@ public class Interfeis extends JFrame {
             actualizarVista(bender);
         });
         labels = new JLabel[bender.map.map.length][];
-        setSize(800,800);
+        setSize(bender.map.map[0].length * 50, (bender.map.map.length * 50 ) + 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         vista.setLayout(new GridLayout(bender.map.map.length, bender.map.map[0].length));
         for (int i = 0; i <bender.map.map.length ; i++) {

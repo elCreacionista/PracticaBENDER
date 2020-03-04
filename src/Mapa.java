@@ -8,14 +8,16 @@ public class Mapa {
         List<StringBuilder> list = new ArrayList<>();
         StringBuilder s = new StringBuilder();
 
+        int randx1 = (int)(Math.random()*sizey - 2) + 1;
+        int randx2 = (int)(Math.random()*sizey - 2) + 1;
+        int randy1 = (int)(Math.random()*sizex - 2) + 1;
+        int randy2 = (int)(Math.random()*sizex - 2) + 1;
+
         for (int i = 0; i < sizex; i++) {
             s.append('#');
         }
         list.add(s);
-        int randx1 = (int)(Math.random()*sizex - 2) + 1;
-        int randy1 = (int)(Math.random()*sizey - 2) + 1;
-        int randx2 = (int)(Math.random()*sizex - 2) + 1;
-        int randy2 = (int)(Math.random()*sizey - 2) + 1;
+
         for (int i = 0; i < sizey; i++) {
             s = new StringBuilder();
             s.append('#');
