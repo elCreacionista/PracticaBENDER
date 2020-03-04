@@ -247,7 +247,7 @@ public class Mapa {
     }
 
 }
-class Casella{
+abstract class Casella{
     Point point;
     int distancia = 1000;
     boolean explorado = false;
@@ -259,7 +259,7 @@ class Casella{
     }
     @Override
     public String toString(){
-        return "hola";
+        return "Casella";
     }
 }
 class Pared extends Casella{
@@ -292,10 +292,6 @@ class Teleportador extends Casella{
     }
 
 
-    public int compareTo(){
-        return 1;
-    }
-
     @Override
     public String toString(){
         return "T";
@@ -316,6 +312,6 @@ class Fi extends Casella{
 class Error extends Casella{
     @Override
     public String toString(){
-        return "SOS";
+        return "ERROR";
     }
 }

@@ -83,19 +83,19 @@ public class main {
 
 
 
-        //String mapa = Mapa.MetodoPere(20,20);
+        String mapa = Mapa.MetodoPere(20,20);
 
-        String mapa = "" +
+        /*String mapa = "" +
                 "##################\n" +
                 "#     X #        #\n" +
                 "#  T    #     #  #\n" +
                 "#       #     #  #\n" +
-                "# #######  ####  #\n" +
+                "# #############  #\n" +
                 "#       #     #  #\n" +
                 "######  ##### #  #\n" +
                 "#       #     #  #\n" +
                 "#           $ # T#\n" +
-                "##################";
+                "##################";*/
         System.out.println(mapa);
 
 
@@ -104,7 +104,8 @@ public class main {
         //System.out.println(xd.comprovarBorder());
 
         Bender bender = new Bender(mapa);
-        System.out.println(bender.bestRun());
+        //System.out.println(bender.bestRun());
+        bender.MetodoParaLaInterfaz();
         Interfeis in = new Interfeis(bender);
         //bot.run();
         //Interfeis inte = new Interfeis(bot);

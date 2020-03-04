@@ -9,16 +9,27 @@ public class Interfeis extends JFrame {
     JLabel[][] labels;
     Container panel;
     JButton boton;
+    JButton boton2;
     Interfeis(Bender bender){
         setLocationRelativeTo(null);
         panel = new Container();
         boton = new JButton();
-        boton.setText("Pulsa'm");
+        boton.setText("Run");
         add(boton);
         boton.setBounds(350,400,100,30);
         boton.addActionListener(actionEvent -> {
             if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
                 bender.unPaso();
+                actualizarVista(bender);
+            }
+        });
+        boton2 = new JButton();
+        boton2.setText("BestRun");
+        add(boton2);
+        boton2.setBounds(350,350,100,30);
+        boton2.addActionListener(actionEvent -> {
+            if (!(bender.map.map[bender.bot.posicion.x][bender.bot.posicion.y] instanceof Fi )) {
+                bender.PasoInteligente();
                 actualizarVista(bender);
             }
         });
@@ -55,7 +66,7 @@ public class Interfeis extends JFrame {
     public void actualizarVista(Bender bender) {
         for (int i = 0; i < bender.map.map.length; i++) {
             for (int j = 0; j < labels[i].length; j++) {
-                labels[i][j].setText("");
+
                 if (bender.bot.posicion.equals(new Point(i, j))) {
                     labels[i][j].setBackground(new Color(150, 150, 150));
                     labels[i][j].setText("X");
@@ -84,7 +95,10 @@ public class Interfeis extends JFrame {
                             labels[i][j].setText("Error");
                             break;
                     }
-                labels[i][j].setText(bender.map.map[i][j].distancia + "");
+                if (bender.map.map[i][j].getDistancia() > 100)
+                    labels[i][j].setText("-");
+                else
+                    labels[i][j].setText(bender.map.map[i][j].distancia + "");
             }
         }
     }
