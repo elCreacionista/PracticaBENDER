@@ -262,6 +262,7 @@ public class Mapa {
 abstract class Casella{
     Point point;
     int distancia = 1000;
+    int numero = 0;
     boolean explorado = false;
     public void setDistancia(int distancia){
         this.distancia = distancia;

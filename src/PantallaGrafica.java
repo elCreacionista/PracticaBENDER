@@ -67,6 +67,7 @@ public class PantallaGrafica extends JFrame {
                     vista.add(labels[i][j]);
             }
         }
+        coloresdependiendodelcamino(bender);
         setVisible(true);
     }
     public void actualizarVista(Bender bender) {
@@ -105,6 +106,29 @@ public class PantallaGrafica extends JFrame {
                     }
                 if (bender.map.map[i][j].getDistancia() < 100)
                     labels[i][j].setText(bender.map.map[i][j].distancia + "");
+            }
+        }
+    }
+
+
+
+    public void coloresdependiendodelcamino(Bender bender){
+        for (int i = 0; i <bender.bot.camino.size() ; i++) {
+            bender.map.map[bender.bot.camino.get(i).x][bender.bot.camino.get(i).y].numero += 1;
+        }
+        for (int i = 0; i < bender.map.map.length ; i++) {
+            for (int j = 0; j < bender.map.map[0].length ; j++) {
+                switch (bender.map.map[i][j].numero){
+                    case 0: break;
+                    case 1: labels[i][j].setBackground(new Color(200,80,80));break;
+                    case 2: labels[i][j].setBackground(new Color(200,70,70));break;
+                    case 3: labels[i][j].setBackground(new Color(200,50,50));break;
+                    case 4: labels[i][j].setBackground(new Color(200,40,40));break;
+                    case 5: labels[i][j].setBackground(new Color(200,30,30));break;
+                    case 6: labels[i][j].setBackground(new Color(200,20,20));break;
+                    default: labels[i][j].setBackground(new Color(200,0,0));break;
+
+                }
             }
         }
     }
