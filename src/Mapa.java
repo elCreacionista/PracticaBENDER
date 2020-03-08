@@ -4,6 +4,9 @@ import java.util.List;
 
 public class Mapa {
 
+
+
+    /*GENERADOR DE MAPES ALEATORIS, PER FER PROVES, NO SEMPRE FUNCIONA*/
     static public String MetodoPere(int sizex, int sizey){
         List<StringBuilder> list = new ArrayList<>();
         StringBuilder s = new StringBuilder();
@@ -56,24 +59,21 @@ public class Mapa {
 
     }
 
-
-
-
-
-
-
-
-
-    Casella[][] map;
-    Teleportador[] teletransportadores;
-    Invers[] inversores;
+    Casella[][] map;                         /*El mapa es un array bidimensional*/
+    Teleportador[] teletransportadores;      /*Un array de teletransportadors*/
+    Invers[] inversores;                     /*Un array de inversors*/
 
     Mapa(String mapa){
+        /*Construeix el mapa
+         * aquests dos mètodes podrien ser 1 però els volía separar per tenir-ho mes visual*/
         constructMap(createMap(mapa));
+
         teletransportadores = getTeleporters();
         inversores = getInversors();
     }
 
+
+    /*Si no te final, cualque casella invàlida, o un teleportador tot sol torna false*/
     public boolean isValid(){
         if (getEnd() == null)
             return false;
@@ -130,6 +130,8 @@ public class Mapa {
     public char[][] createMap(String mapa) {
 
 
+        /*Construeix el mapa*/
+
         List<List<Character>> listas = new ArrayList<>();
         List<Character> linea = new ArrayList<>();
 
@@ -155,13 +157,14 @@ public class Mapa {
                 map[i][j] = listas.get(i).get(j);
             }
         }
-
+        /*Torna un array de chars*/
         return map;
     }
 
 
     public void constructMap(char[][] mapa){
 
+        /*Transforma l'array de chars en caselles*/
         map = new Casella[mapa.length][];
         for (int i = 0; i < map.length; i++) {
             map[i] = new Casella[mapa[i].length];
@@ -183,12 +186,14 @@ public class Mapa {
         }
     }
 
+    /*Cerca els inversors*/
     public Invers[] getInversors(){
         List<Point> lista = new ArrayList<>();
         for (int i = 0; i < this.map.length ; i++) {
             for (int j = 0; j < this.map[i].length ; j++) {
                 if (map[i][j] instanceof Invers)
                     lista.add(new Point(i,j));
+                    //map[i][j] = new Buid(); /*Deix el Invers() per poder veurer-ho a la PantallaGrafica*/
             }
         }
         Invers[] t = new Invers[lista.size()];
@@ -198,13 +203,14 @@ public class Mapa {
 
         return t;
     }
+    /*Cerca els teletransportadors*/
     public Teleportador[] getTeleporters(){
         List<Point> lista = new ArrayList<>();
         for (int i = 0; i < this.map.length ; i++) {
             for (int j = 0; j < this.map[i].length ; j++) {
                 if (map[i][j] instanceof Teleportador) {
                     lista.add(new Point(i, j));
-                    //map[i][j] = new Buid();
+                    //map[i][j] = new Buid(); /*Deix el Teleportadors() per poder veurer-ho a la PantallaGrafica*/
                 }
             }
         }
@@ -215,7 +221,7 @@ public class Mapa {
 
         return t;
     }
-
+    /*Cerca els errors*/
     public boolean getError(){
         for (int i = 0; i < this.map.length ; i++) {
             for (int j = 0; j < this.map[i].length ; j++) {
@@ -226,7 +232,7 @@ public class Mapa {
         }
         return false;
     }
-
+    /*Cerca el bot, en cas de que n-hi hagui més de 1 només funcionaria el primer, be podria fer que funcionin tots pero això ja seria un altre cosa*/
     public Point getBot(){
         for (int i = 0; i < this.map.length ; i++) {
             for (int j = 0; j < this.map[i].length ; j++) {
@@ -238,6 +244,7 @@ public class Mapa {
         }
         return null;
     }
+    /*Cerca la casella de end, però en aquest cas totes les caselles funcionen*/
     public Point getEnd(){
         for (int i = 0; i < this.map.length ; i++) {
             for (int j = 0; j < this.map[i].length ; j++) {
@@ -249,6 +256,9 @@ public class Mapa {
     }
 
 }
+
+
+                        /*------------------- CLASSES DE LES CASELLES -------------------*/
 abstract class Casella{
     Point point;
     int distancia = 1000;

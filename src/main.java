@@ -1,6 +1,3 @@
-import java.util.Arrays;
-
-
 /* String mapa = "" +
                 "##################\n" +
                 "#                #\n" +
@@ -80,37 +77,20 @@ String mapa = "" +
 
 public class main {
     public static void main(String[] args) {
+        //String mapa = Mapa.MetodoPere(10,10);
+        String mapa = "" +
+                "##########\n" +
+                "#   #X# $#\n" +
+                "##########";
 
-
-
-        String mapa = Mapa.MetodoPere(30,30);
-        /*String mapa = "" +
-                "#############\n" +
-                "#           #\n" +
-                "#          X#\n" +
-                "# T         #\n" +
-                "#############\n" +
-                "#     T     #\n" +
-                "#      ######\n" +
-                "#           #\n" +
-                "#      $    #\n" +
-                "#############";*/
         System.out.println(mapa);
-
-
-        Mapa xd = new Mapa(mapa);
-
-        //System.out.println(xd.comprovarBorder());
 
         Bender bender = new Bender(mapa);
         //System.out.println(bender.bestRun());
-        //System.out.println(bender.run());
-        bender.MetodoParaLaInterfaz();
-        Interfeis in = new Interfeis(bender);
-        //bot.run();
-        //Interfeis inte = new Interfeis(bot);
+        System.out.println(bender.run());
 
-        System.out.println("Hay un bucle: " + bender.bot.bucle());
-        System.out.println("El camino: " + bender.bot.path);
+        //bender.MetodoParaLaInterfaz();
+        //PantallaGrafica in = new PantallaGrafica(bender);
+
     }
 }

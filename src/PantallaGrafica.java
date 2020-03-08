@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Interfeis extends JFrame {
+public class PantallaGrafica extends JFrame {
 
 
     JLabel[][] labels;
@@ -10,7 +10,7 @@ public class Interfeis extends JFrame {
     Container botones;
     JButton boton;
     JButton boton2;
-    Interfeis(Bender bender){
+    PantallaGrafica(Bender bender){
 
         pane = new JPanel();
         botones = new Container();
